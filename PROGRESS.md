@@ -499,6 +499,14 @@
 - Problèmes / à surveiller : les changements de la demande précédente et
   ceux-ci ne sont pas encore commités.
 
+## 2026-10-22 — retour du dessin LaMain et de la compétition
+- Fait : le hero reprend le dessin technique LaMain avec son balayage de
+  surbrillance, la vidéo LePotager est retirée du hero, la carte School robotics
+  competition est restaurée avec un poster, et le balayage ajouté sur le GIF
+  LaMain est retiré. `css_version` 54.
+- Vérifié : `./scripts/check.sh` vert (8 tests).
+- Problèmes / à surveiller : les changements ne sont pas commités.
+
 ## AAAA-MM-JJ — F001
 - Fait : ...
 - Décisions prises : ...

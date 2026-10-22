@@ -25,10 +25,15 @@
     </div>
 
     <figure class="hand-figure">
-      <div class="media">
-        <video autoplay muted loop playsinline poster="assets/documents/LePotager/lepotager-hero-poster.jpg" aria-label="The LePotager robot arm picking, pressing and sorting fruit">
-          <source src="assets/documents/LePotager/lepotager-hero.mp4" type="video/mp4">
-        </video>
+      <div class="hand" role="img" aria-label="LaMain, a three-finger robot hand, drawn as a blue technical line drawing">
+        <div class="hand__lines"></div>
+        <div class="hand__sweep" aria-hidden="true"><div class="hand__lines"></div></div>
+        <!-- Coordinates are in the drawing's own 588 x 580 space. Move the dots onto the right parts once the clean CAD export is in. -->
+        <svg class="hand__notes" viewBox="0 0 588 580" aria-hidden="true">
+          <g class="note"><circle cx="142.7" cy="246.6" r="4"/><path d="M142.7,246.6 L164,54"/><text x="170" y="60">linked flexion</text></g>
+          <g class="note"><circle cx="215.4" cy="263.4" r="4"/><path d="M215.4,263.4 L398,114"/><text x="404" y="120">abduction servo</text></g>
+          <g class="note"><circle cx="316.1" cy="448.3" r="4"/><path d="M316.1,448.3 L422,506"/><text x="428" y="512">thumb, two servos in series</text></g>
+        </svg>
       </div>
       <figcaption class="hand-caption paper">
         <span class="label is-live--pulse">● Currently building</span>
@@ -93,7 +98,7 @@
         <p class="links"><a class="more" href="projects/lamain.html">Read the full sheet</a><a class="more" href="https://github.com/Arthur-Mourgue/LaMain">GitHub</a></p>
       </div>
       <figure>
-        <div class="media media--wide media--sweep"><img src="assets/documents/LaMain/lamainv0.gif" alt="The first LaMain prototype, the three-finger hand mounted on a robot, seen moving"></div>
+        <div class="media media--wide"><img src="assets/documents/LaMain/lamainv0.gif" alt="The first LaMain prototype, the three-finger hand mounted on a robot, seen moving"></div>
       </figure>
     </article>
 
@@ -171,6 +176,14 @@
           <h3>RoboCup and French Robotics Cup</h3>
           <span class="spec">Robot Club Toulon · 2022 to 2023</span>
           <p>I kept two autonomous robots running through multi-day tournaments and ensured their mechanical reliability. First in the scientific challenge, third in the Middle Size League.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="media media--crop"><video autoplay muted loop playsinline poster="assets/documents/competition-robotique-poster.jpg"><source src="assets/documents/competition-robotique.mp4" type="video/mp4"></video></div>
+        <div class="card__text paper">
+          <h3>School robotics competition</h3>
+          <span class="spec">Université de Toulon · 2022</span>
+          <p>Won with an autonomous robot built around a PIC32 microcontroller and programmed in C.</p>
         </div>
       </article>
       <article class="card reveal">

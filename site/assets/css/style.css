@@ -189,21 +189,6 @@ body::after {
    auto cross-axis margins replace the stretch and the frame would shrink to the
    image's intrinsic width instead of following the column. */
 .media--wide { width: 100%; max-width: 520px; margin-inline: auto; }
-/* Highlight sweep for the LaMain hand, a soft blue band moving top to bottom. */
-.media--sweep::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, transparent 0%, rgba(143, 162, 255, 0) 30%, rgba(143, 162, 255, 0.35) 50%, rgba(143, 162, 255, 0) 70%, transparent 100%);
-  transform: translateY(-100%);
-  animation: media-sweep 7s ease-in-out infinite;
-  mix-blend-mode: screen;
-}
-@keyframes media-sweep {
-  0%        { transform: translateY(-100%); }
-  55%, 100% { transform: translateY(100%); }
-}
 /* Two images side by side. */
 .media-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 20px); align-items: start; }
 
@@ -276,7 +261,7 @@ body::after {
 .intro .lead { font-size: var(--body); line-height: 1.55; }
 .intro .note { color: var(--muted); }
 
-.hand-figure { margin: 0; justify-self: end; width: 100%; animation: hero-in 700ms 120ms ease both; }
+.hand-figure { margin: 0; justify-self: end; width: min(100%, 60vh); width: min(100%, 60svh); animation: hero-in 700ms 120ms ease both; }
 @keyframes hero-in {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
@@ -533,7 +518,6 @@ body::after {
   .is-live--pulse { animation: none; }
   body::after { animation: none; opacity: 0.2; }
   .intro, .hand-figure { animation: none; }
-  .media--sweep::after { animation: none; opacity: 0; }
   .media:hover { transform: none; }
   .card:hover { translate: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
