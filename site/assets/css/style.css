@@ -29,39 +29,6 @@
   --section: clamp(6rem, 13vh, 9.375rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #12131A;
-    --ink: #E9E7E1;
-    --muted: #A09E97;
-    --blue: #8FA2FF;
-    --hair: rgba(143, 162, 255, 0.35);
-    --slot: rgba(18, 19, 26, 0.85);
-    --grid: url("../img/crosses-dark.svg");
-  }
-}
-
-/* Explicit choice from the theme toggle overrides the system preference above.
-   Default (no saved choice) is forced to light, see assets/js/site.js. */
-:root[data-theme="dark"] {
-  --paper: #12131A;
-  --ink: #E9E7E1;
-  --muted: #A09E97;
-  --blue: #8FA2FF;
-  --hair: rgba(143, 162, 255, 0.35);
-  --slot: rgba(18, 19, 26, 0.85);
-  --grid: url("../img/crosses-dark.svg");
-}
-:root[data-theme="light"] {
-  --paper: #F4F2ED;
-  --ink: #111111;
-  --muted: #5F5E5A;
-  --blue: #1A0DAB;
-  --hair: rgba(26, 13, 171, 0.35);
-  --slot: rgba(244, 242, 237, 0.85);
-  --grid: url("../img/crosses.svg");
-}
-
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -186,14 +153,8 @@ img, video { display: block; max-width: 100%; }
    auto cross-axis margins replace the stretch and the frame would shrink to the
    image's intrinsic width instead of following the column. */
 .media--wide { width: 100%; max-width: 520px; margin-inline: auto; }
-.prose figure:has(.media--narrow) figcaption,
-.prose figure:has(.media--medium) figcaption,
-.sheet figure:has(.media--narrow) figcaption,
-.sheet figure:has(.media--medium) figcaption,
-.sheet figure:has(.media--wide) figcaption { text-align: center; }
 /* Two images side by side. */
 .media-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 20px); align-items: start; }
-.media-row figcaption { grid-column: 1 / -1; text-align: center; }
 
 /* ---------- Section heads ---------- */
 .section { padding-top: var(--section); scroll-margin-top: 76px; }
@@ -231,8 +192,7 @@ img, video { display: block; max-width: 100%; }
   padding-block: clamp(64px, 10vh, 120px) clamp(56px, 8vh, 104px);
 }
 /* Sticky section nav. The paper chip hugs the links (no full-width bar) and its
-   soft halo hides the cross grid behind it. margin-right keeps it clear of the
-   fixed theme toggle.
+   soft halo hides the cross grid behind it.
    The bar floats over the hero instead of pushing it down: a fixed height plus a
    negative bottom margin of the same value cancels the space it takes in the
    flow, so the hero still fills the first screen and stays vertically centred. */
@@ -243,7 +203,6 @@ img, video { display: block; max-width: 100%; }
   z-index: 15;
   width: fit-content;
   margin-left: auto;
-  margin-right: 52px;
   margin-bottom: calc(-1 * var(--nav-h));
   height: var(--nav-h);
   display: flex;
@@ -284,7 +243,7 @@ img, video { display: block; max-width: 100%; }
           mask: url("../img/lamain-lines-backing.png") center / contain no-repeat;
 }
 
-/* The drawing is a mask: its colour follows var(--blue), so it works in night mode.
+/* The drawing is a mask: its colour follows var(--blue).
    The stroke colour is pre-blended with the paper rather than set with opacity: the
    result looks the same, but the strokes stay opaque and hide the reactive crosses
    behind them (at opacity 0.72 the crosses bled through the ink). */
@@ -475,25 +434,9 @@ img, video { display: block; max-width: 100%; }
 .prose h3 { font-size: calc(var(--h2) * 0.72); font-weight: 700; margin: 36px 0 12px; }
 .prose p { margin: 0 0 16px; line-height: 1.65; }
 .prose figure { margin: 36px 0; }
-.prose figcaption, .sheet figcaption { font: 0.75rem/1.6 var(--mono); color: var(--muted); }
-.prose figcaption { margin-top: 8px; }
 .prose > :first-child { margin-top: 0; }
 
 .pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: var(--section); padding-block: 20px 56px; border-top: 1px solid var(--blue); background: var(--paper); }
-
-/* ---------- Theme toggle ---------- */
-.theme-toggle {
-  position: fixed; top: 20px; right: var(--pad);
-  z-index: 20;
-  width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--blue);
-  background: var(--paper);
-  color: var(--blue);
-  font: 1rem var(--serif);
-  cursor: pointer;
-}
-.theme-toggle:hover { background: var(--hair); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {

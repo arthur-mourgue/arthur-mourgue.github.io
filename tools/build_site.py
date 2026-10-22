@@ -2,9 +2,8 @@
 """build_site.py: generate the static site/ pages from site-src/.
 
 The site is plain HTML with no runtime dependency. To stop copy-pasting the
-shared <head>, theme toggle and script tags across the five pages, the sources
-live in site-src/ and this standard-library-only script assembles them into
-site/.
+shared <head> and script tags across the five pages, the sources live in
+site-src/ and this standard-library-only script assembles them into site/.
 
 Workflow:
     edit site-src/                 (pages.json + pages/*.body.html + partials/)
@@ -80,7 +79,6 @@ def render_page(
         "root": root,
         "css_version": str(config["css_version"]),
         "js_version": str(config["js_version"]),
-        "theme_toggle": resolve_includes("{{include:theme-toggle}}", partials),
         "body": bodies[page["body"]],
     }
 

@@ -8,13 +8,13 @@ by a standard-library script; everything else is plain files.
 ```
 docs/            editorial + strategy + art direction (French, human-facing)
 site-src/        SOURCE for the website (edit here)
-  layout.html    shared skeleton: <head>, theme toggle, script tag
-  partials/      reusable fragments (theme-toggle.html)
+  layout.html    shared skeleton: <head>, script tag
+  partials/      optional reusable fragments
   pages.json     per-page metadata (title, description, og, asset versions)
   pages/         per-page <main> content (*.body.html)
 site/            GENERATED website (never edit by hand)
   assets/css     style.css — all art direction, variables at the top
-  assets/js      site.js  — two IIFEs: theme toggle + cursor tracking
+  assets/js      site.js  — two IIFEs: cursor tracking + click ripple
   assets/img     images; produced by tools/*.py and tools/duotone.sh
   assets/video   generated videos (git-ignored except README.txt)
 tools/           offline pipeline + site generator
@@ -32,10 +32,9 @@ static files; nothing in `site/` imports anything at runtime.
 
 ### Shared front-end
 `site/assets/css/style.css` and `site/assets/js/site.js` are unchanged plain
-assets. `site.js` now holds a single IIFE, the theme toggle (the cursor-reactive
-crosses were dropped with the v3 art direction). The shared `<head>`, theme
-toggle and script tags are produced once from `site-src/layout.html` +
-`site-src/partials/`, so the five pages can no longer drift from each other.
+assets. `site.js` holds two IIFEs, cursor tracking and the click ripple. The
+shared `<head>` and script tags are produced once from `site-src/layout.html`,
+so the five pages can no longer drift from each other.
 The visual system follows the "temporary" handoff: fluid `clamp()` sizes, a hero
 that fits exactly one screen, and the same paper / crosses / serif / one-blue
 direction.

@@ -455,6 +455,20 @@
 - Vérifié : `./scripts/check.sh` vert ; débordement mesuré sur les 5 pages à
   485/768/1280 px (aucun) ; zoom texte mesuré à 100/150/200 %.
 
+## 2026-10-22 — textes resserrés, thème clair unique, liens GitHub
+- Fait : suppression du bouton de thème et du mode sombre, le site reste en clair
+  (`color-scheme: light`, plus de `theme-toggle`, `crosses-dark.svg` retiré).
+  Les fiches projet sont réécrites plus courtes, sans deux-points ni tirets
+  cadratins, sans légendes de figures et sans la section « What I did not finish »
+  de Capra. GNU Radio disparaît du texte et du nom de l'image Safran. Les liens
+  GitHub de LaMain et LePotager sont ajoutés à côté de « Read the full sheet ».
+  `css_version` 52, `js_version` 15.
+- Vérifié : `./scripts/check.sh` vert (8 tests, dont thème clair, liens GitHub,
+  absence de tiret cadratin et de deux-points dans les paragraphes).
+- Problèmes / à surveiller : `site-content.md` et `docs/00-site-content.md`
+  gardent l'ancien texte (GNU Radio, légendes) et ne sont pas utilisés par le
+  build ; `README.md` est vide ; `features.json` est vide ; `og.png` manque.
+
 ## AAAA-MM-JJ — F001
 - Fait : ...
 - Décisions prises : ...

@@ -6,6 +6,7 @@ Also run by ./scripts/check.sh.
 """
 from __future__ import annotations
 
+import html
 import re
 import unittest
 from pathlib import Path
@@ -17,6 +18,8 @@ KNOWN_MISSING = {"cv.pdf"}
 
 COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 ATTR_RE = re.compile(r'(?:href|src)="([^"]+)"')
+P_RE = re.compile(r"<p\b[^>]*>(.*?)</p>", re.DOTALL)
+TAG_RE = re.compile(r"<[^>]+>")
 REQUIRED_META = ('charset="utf-8"', 'name="viewport"', 'name="color-scheme"', 'rel="stylesheet"')
 
 
@@ -59,6 +62,33 @@ class GeneratedSiteTest(unittest.TestCase):
         for path, text in self.pages.items():
             with self.subTest(page=path):
                 self.assertNotIn("file://", text)
+
+    def test_light_theme_only(self) -> None:
+        for path, text in self.pages.items():
+            with self.subTest(page=path):
+                self.assertIn('<meta name="color-scheme" content="light">', text)
+                self.assertNotIn("theme-toggle", text)
+                self.assertNotIn("data-theme", text)
+
+    def test_project_github_links(self) -> None:
+        home = self.pages["site/index.html"]
+        self.assertIn("https://github.com/Arthur-Mourgue/LaMain", home)
+        self.assertIn("https://github.com/Arthur-Mourgue/LePotager", home)
+        self.assertIn("https://github.com/Arthur-Mourgue/LaMain", self.pages["site/projects/lamain.html"])
+        self.assertIn("https://github.com/Arthur-Mourgue/LePotager", self.pages["site/projects/lepotager.html"])
+
+    def test_no_em_dash(self) -> None:
+        for path, text in self.pages.items():
+            with self.subTest(page=path):
+                self.assertNotIn("—", text)
+
+    def test_no_colon_in_paragraphs(self) -> None:
+        for path, text in self.pages.items():
+            body = COMMENT_RE.sub("", text)
+            for paragraph in P_RE.findall(body):
+                plain = html.unescape(TAG_RE.sub("", paragraph))
+                with self.subTest(page=path, text=plain[:60]):
+                    self.assertNotIn(":", plain)
 
 
 if __name__ == "__main__":
