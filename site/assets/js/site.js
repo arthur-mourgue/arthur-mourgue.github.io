@@ -59,3 +59,22 @@
 
   targets.forEach(function (el) { observer.observe(el); });
 })();
+
+// Ambient touches: every few seconds a soft blue patch lights up the cross
+// grid at a random point in the viewport, then fades. Skipped under
+// prefers-reduced-motion.
+(function () {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  function touch() {
+    var el = document.createElement("div");
+    el.className = "touch";
+    el.style.setProperty("--tx", (window.scrollX + Math.random() * window.innerWidth) + "px");
+    el.style.setProperty("--ty", (window.scrollY + Math.random() * window.innerHeight) + "px");
+    el.addEventListener("animationend", function () { el.remove(); });
+    document.body.appendChild(el);
+    setTimeout(touch, 5000 + Math.random() * 7000);
+  }
+
+  setTimeout(touch, 2500 + Math.random() * 3000);
+})();

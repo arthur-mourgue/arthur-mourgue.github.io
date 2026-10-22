@@ -507,6 +507,14 @@
 - Vérifié : `./scripts/check.sh` vert (8 tests).
 - Problèmes / à surveiller : les changements ne sont pas commités.
 
+## 2026-10-22 — menu simplifié, CV.pdf, effets aléatoires
+- Fait : le menu haut ne garde que Work, Research et Background ; les liens
+  CV industry et CV research sont remplacés par CV.pdf dans l'intro et le
+  contact. Le badge Capra repasse à Running. Le fond reçoit des touches bleues
+  aléatoires via site.js, et le balayage de la main est plus visible avec un
+  glow. `css_version` 55, `js_version` 17.
+- Vérifié : `./scripts/check.sh` vert (8 tests).
+
 ## AAAA-MM-JJ — F001
 - Fait : ...
 - Décisions prises : ...

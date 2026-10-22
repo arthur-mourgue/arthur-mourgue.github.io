@@ -106,6 +106,25 @@ body::after {
   100% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
 }
 
+/* Random ambient touches: a short blue patch on the cross grid, created by
+   site.js at a random point in the viewport. */
+.touch {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("../img/crosses-accent.svg");
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(circle 140px at var(--tx, 50%) var(--ty, 50%), #000 0%, transparent 100%);
+          mask-image: radial-gradient(circle 140px at var(--tx, 50%) var(--ty, 50%), #000 0%, transparent 100%);
+  animation: touch-pulse 2.6s ease-out forwards;
+}
+@keyframes touch-pulse {
+  0%   { opacity: 0; }
+  15%  { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+
 /* Click ripple: a wave that turns the page's own crosses blue as it passes.
    The layer spans the whole document (inset: 0, anchored to body like the hover
    glow) so its 28px crosses share body's background origin: the blue crosses land
@@ -301,8 +320,9 @@ body::after {
   -webkit-mask-size: 100% 35%; mask-size: 100% 35%;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
   animation: sweep 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--blue) 45%, transparent));
 }
-.hand__sweep .hand__lines { opacity: 0.6; }
+.hand__sweep .hand__lines { opacity: 1; background: var(--blue); }
 @keyframes sweep {
   0%        { -webkit-mask-position: 0 -60%; mask-position: 0 -60%; }
   75%, 100% { -webkit-mask-position: 0 160%; mask-position: 0 160%; }
