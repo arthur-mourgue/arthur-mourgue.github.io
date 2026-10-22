@@ -3,7 +3,8 @@
     <a href="#work">Work</a>
     <a href="#research">Research</a>
     <a href="#background">Background</a>
-    <a href="assets/documents/cv_arthurmourgue.pdf">CV</a>
+    <a href="assets/documents/Arthur_Mourgue_CV_industry.pdf">CV industry</a>
+    <a href="assets/documents/Arthur_Mourgue_CV_research.pdf">CV research</a>
   </nav>
 
   <!-- ================= HERO ================= -->
@@ -13,9 +14,10 @@
       <h1>Research Engineer in AI for Robotics</h1>
       <p class="lead">I work on AI for robots, from training the models to making them work on real hardware.</p>
       <p>Three years of R&amp;D at <a href="https://www.safran-group.com/companies/safran-data-systems">Safran</a>, six months in R&amp;D at <a href="https://caprarobotics.com">Capra Robotics</a> in Denmark, and now an MSc in Robotics at <a href="https://www.sorbonne-universite.fr">Sorbonne Université</a> (ex-UPMC). Currently building LaMain, a hand with touch sensors for the SO-101 arm.</p>
-      <p class="note">Looking for an end-of-studies internship from March 2027.</p>
+      <p class="note">Looking for a six-month end-of-studies internship starting between March and May 2027. I am most interested in tactile manipulation, imitation learning and how training data shapes robot policies.</p>
       <p class="links">
-        <a href="assets/documents/cv_arthurmourgue.pdf">cv.pdf</a>
+        <a href="assets/documents/Arthur_Mourgue_CV_industry.pdf">CV industry</a>
+        <a href="assets/documents/Arthur_Mourgue_CV_research.pdf">CV research</a>
         <a href="https://github.com/Arthur-Mourgue">github</a>
         <a href="https://www.linkedin.com/in/arthur-mourgue/">linkedin</a>
         <a href="mailto:arthurmourgue0@gmail.com">email</a>
@@ -23,15 +25,10 @@
     </div>
 
     <figure class="hand-figure">
-      <div class="hand" role="img" aria-label="LaMain, a three-finger robot hand, drawn as a blue technical line drawing">
-        <div class="hand__lines"></div>
-        <div class="hand__sweep" aria-hidden="true"><div class="hand__lines"></div></div>
-        <!-- Coordinates are in the drawing's own 588 x 580 space. Move the dots onto the right parts once the clean CAD export is in. -->
-        <svg class="hand__notes" viewBox="0 0 588 580" aria-hidden="true">
-          <g class="note"><circle cx="142.7" cy="246.6" r="4"/><path d="M142.7,246.6 L164,54"/><text x="170" y="60">linked flexion</text></g>
-          <g class="note"><circle cx="215.4" cy="263.4" r="4"/><path d="M215.4,263.4 L398,114"/><text x="404" y="120">abduction servo</text></g>
-          <g class="note"><circle cx="316.1" cy="448.3" r="4"/><path d="M316.1,448.3 L422,506"/><text x="428" y="512">thumb, two servos in series</text></g>
-        </svg>
+      <div class="media">
+        <video autoplay muted loop playsinline poster="assets/documents/LePotager/lepotager-hero-poster.jpg" aria-label="The LePotager robot arm picking, pressing and sorting fruit">
+          <source src="assets/documents/LePotager/lepotager-hero.mp4" type="video/mp4">
+        </video>
       </div>
       <figcaption class="hand-caption paper">
         <span class="label is-live--pulse">● Currently building</span>
@@ -43,8 +40,8 @@
           <div class="hand-caption__right">
             <span class="hand-caption__tags">
               <span class="hand-caption__tag">5 DOF</span>
-              <span class="hand-caption__tag">under 200 g</span>
-              <span class="hand-caption__tag">under €200</span>
+              <span class="hand-caption__tag">designed for under 200 g</span>
+              <span class="hand-caption__tag">designed for under €200</span>
             </span>
             <span class="hand-caption__credit">Mechanical design with <a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a></span>
           </div>
@@ -58,72 +55,23 @@
     <div class="section-head section-head--table"><h2>Selected work</h2></div>
     <table class="sheet-table">
       <tbody>
-        <tr><td><a href="#sheet-01">LaMain</a>, Open-source robot hand with touch for the SO-101 arm</td><td class="col-year">2026</td><td class="is-live is-live--pulse">● Building</td></tr>
-        <tr><td><a href="#sheet-02">Capra Robotics</a>, Computer vision and localisation on autonomous mobile robots</td><td class="col-year">2026</td><td class="is-live">● Running</td></tr>
-        <tr><td><a href="#sheet-03">LePotager</a>, Robot arm that sorts fruit by touch</td><td class="col-year">2026</td><td class="is-live">● Won Most Creative Project</td></tr>
-        <tr><td><a href="#sheet-04">Safran</a>, Programming flight-test hardware in plain English</td><td class="col-year">2023 to 2025</td><td class="is-live">● Presented at the European Test and Telemetry Conference</td></tr>
+        <tr><td><a href="#sheet-01">LePotager</a>, robot arm that sorts fruit by touch</td><td class="col-year">2026</td><td class="is-live">● Won Most Creative Project</td></tr>
+        <tr><td><a href="#sheet-02">LaMain</a>, open-source robot hand with touch for the SO-101 arm</td><td class="col-year">2026</td><td class="is-live is-live--pulse">● Building</td></tr>
+        <tr><td><a href="#sheet-03">Capra Robotics</a>, computer vision and localisation on autonomous mobile robots</td><td class="col-year">2026</td><td class="is-live">● On a real robot</td></tr>
+        <tr><td><a href="#sheet-04">Safran</a>, programming flight-test hardware in plain English</td><td class="col-year">2023 to 2025</td><td class="is-live">● Published at ETTC 2025</td></tr>
       </tbody>
     </table>
 
-    <article id="sheet-01" class="sheet" aria-labelledby="s1">
+    <article id="sheet-01" class="sheet reveal" aria-labelledby="s1">
       <div class="sheet__text paper">
-        <h3 id="s1">LaMain</h3>
-        <p>An open-source three-finger hand for the SO-101 arm, designed with <a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a>. It stays under 200 grams so the arm can still lift objects, and it carries touch sensors on the fingertips.</p>
-        <p>The goal is to train robot learning models with touch, from imitation learning to vision-language-action models.</p>
-        <div class="sheet__tags">
-          <span>5 DOF</span>
-          <span>FlexiTac</span>
-          <span>LeRobot</span>
-          <span>PyTorch</span>
-          <span>Python</span>
-          <span>C/C++</span>
-        </div>
-        <p class="links"><a class="more" href="projects/lamain.html">Read the full sheet</a><a class="more" href="https://github.com/Arthur-Mourgue/LaMain">GitHub</a></p>
-      </div>
-      <figure>
-        <div class="media media--wide"><img src="assets/documents/LaMain/lamainv0.gif" alt="The first LaMain prototype, the three-finger hand mounted on a robot, seen moving"></div>
-      </figure>
-    </article>
-
-    <article id="sheet-02" class="sheet" aria-labelledby="s2">
-      <div class="sheet__text paper">
-        <h3 id="s2">Capra Robotics</h3>
-        <p>Six months on autonomous mobile robots in Denmark. I trained a segmentation model that lets the robot see obstacles its LiDAR misses, on a dataset built with ten times less manual labelling.</p>
-        <p>I also moved face and plate anonymisation inside the camera, and built the localisation that lets the robot dock to a food cart, 18 times out of 18 in tests.</p>
-        <div class="sheet__tags">
-          <span>SegFormer</span>
-          <span>YOLOX</span>
-          <span>Transformer</span>
-          <span>CNN</span>
-          <span>CUDA</span>
-          <span>ROS 2</span>
-          <span>Nav2</span>
-          <span>Jetson Orin Nano</span>
-          <span>OAK-D</span>
-          <span>ONNX</span>
-          <span>Docker</span>
-          <span>Python</span>
-          <span>C/C++</span>
-        </div>
-        <a class="more" href="projects/capra.html">Read the full sheet</a>
-      </div>
-      <figure>
-        <div class="media"><video autoplay muted loop playsinline><source src="assets/documents/Capra/capra-segmentation.mp4" type="video/mp4"></video></div>
-      </figure>
-    </article>
-
-    <article id="sheet-03" class="sheet" aria-labelledby="s3">
-      <div class="sheet__text paper">
-        <h3 id="s3">LePotager</h3>
+        <h3 id="s1">LePotager</h3>
         <p>In 48 hours at a LeRobot hackathon, we built a robot arm that sorts fruit by pressing it. Colour can lie about ripeness, touch does not.</p>
-        <p>The policy is an imitation learning model trained on camera images and a low-cost pressure sensor.</p>
+        <p>The policy is an imitation learning model trained on camera images and a low-cost pressure sensor. We also learned that too many recovery demonstrations taught the policy to miss the fruit.</p>
         <div class="sheet__tags">
           <span>ACT</span>
-          <span>PyTorch</span>
           <span>LeRobot</span>
           <span>SO-101</span>
           <span>piezoresistive sensor</span>
-          <span>Python</span>
         </div>
         <p class="links"><a class="more" href="projects/lepotager.html">Read the full sheet</a><a class="more" href="https://github.com/Arthur-Mourgue/LePotager">GitHub</a></p>
       </div>
@@ -132,18 +80,51 @@
       </figure>
     </article>
 
-    <article id="sheet-04" class="sheet" aria-labelledby="s4">
+    <article id="sheet-02" class="sheet reveal" aria-labelledby="s2">
+      <div class="sheet__text paper">
+        <h3 id="s2">LaMain</h3>
+        <p>An open-source three-finger hand for the SO-101 arm, designed with <a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a>. It is designed to stay under 200 grams so the arm can still lift objects, and it carries touch sensors on the fingertips.</p>
+        <p>The goal is to train robot learning models with touch, from imitation learning to vision-language-action models.</p>
+        <div class="sheet__tags">
+          <span>FlexiTac</span>
+          <span>LeRobot</span>
+          <span>PyTorch</span>
+        </div>
+        <p class="links"><a class="more" href="projects/lamain.html">Read the full sheet</a><a class="more" href="https://github.com/Arthur-Mourgue/LaMain">GitHub</a></p>
+      </div>
+      <figure>
+        <div class="media media--wide media--sweep"><img src="assets/documents/LaMain/lamainv0.gif" alt="The first LaMain prototype, the three-finger hand mounted on a robot, seen moving"></div>
+      </figure>
+    </article>
+
+    <article id="sheet-03" class="sheet reveal" aria-labelledby="s3">
+      <div class="sheet__text paper">
+        <h3 id="s3">Capra Robotics</h3>
+        <p>Six months on autonomous mobile robots in Denmark. I trained a segmentation model that lets the robot see obstacles its LiDAR misses, on a dataset built with ten times less manual labelling.</p>
+        <p>I also moved face and plate anonymisation inside the camera, and built the localisation that lets the robot dock to a food cart, 18 times out of 18 in tests.</p>
+        <div class="sheet__tags">
+          <span>SegFormer</span>
+          <span>YOLOX</span>
+          <span>ROS 2</span>
+          <span>Jetson Orin Nano</span>
+          <span>OAK-D</span>
+        </div>
+        <a class="more" href="projects/capra.html">Read the full sheet</a>
+      </div>
+      <figure>
+        <div class="media"><video autoplay muted loop playsinline poster="assets/documents/Capra/capra-segmentation-poster.jpg"><source src="assets/documents/Capra/capra-segmentation.mp4" type="video/mp4"></video></div>
+      </figure>
+    </article>
+
+    <article id="sheet-04" class="sheet reveal" aria-labelledby="s4">
       <div class="sheet__text paper">
         <h3 id="s4">Safran</h3>
         <p>At <a href="https://www.safran-group.com/companies/safran-data-systems">Safran</a>, flight-test engineers can program an on-board computer, but only in C. The project lets them describe what they want in plain English.</p>
         <p>A local language model turns the request into blocks they can check and edit, and the blocks become embedded C++.</p>
         <div class="sheet__tags">
-          <span>NLP</span>
           <span>Llama 3 8B</span>
           <span>C++</span>
           <span>ARM</span>
-          <span>Python</span>
-          <span>Docker</span>
         </div>
         <a class="more" href="projects/dagobert.html">Read the full sheet</a>
       </div>
@@ -159,11 +140,11 @@
     <div class="research">
       <div class="research__block">
         <ul class="papers">
-          <li>
+          <li class="reveal">
             <a href="https://conference-ettc.org/ettc-2025/program/detailed-program/#:~:text=Arthur%20Mourgue">Facilitating Advanced Real-Time Data Processing Through Auto-Coding: An Application of Large Language Models for Intelligent Flight Test Instrumentation</a>
             <span class="spec">ETTC 2025, European Test and Telemetry Conference · co-author</span>
           </li>
-          <li>
+          <li class="reveal">
             <a href="assets/documents/B6_D_tection_reconnaissance_gammares-2.pdf">Detection and recognition of gammarids</a>
             <span class="spec">Technical paper, INSA Lyon, BioMAÉ vision pipeline · co-author</span>
           </li>
@@ -176,7 +157,7 @@
   <section class="section">
     <div class="section-head"><h2>Other projects</h2></div>
     <div class="cards">
-      <article class="card">
+      <article class="card reveal">
         <div class="media"><img src="assets/documents/pieplinegammarebiomae.png" alt="Multi-stage pipeline detecting and classifying gammarids in water samples"></div>
         <div class="card__text paper">
           <h3>Water quality monitoring</h3>
@@ -184,7 +165,7 @@
           <p>A vision pipeline that detects gammarids, small crustaceans used to monitor water quality. YOLOv11-N and MobileNetV3, about 90% accuracy. Code on <a href="https://github.com/Arthur-Mourgue/biomae-gammarus">GitHub</a>.</p>
         </div>
       </article>
-      <article class="card">
+      <article class="card reveal">
         <div class="media"><img src="assets/documents/RobotClubToulonaisScientificchallenge.jpg" alt="The Robot Club Toulon team with its robots and the first-place scientific challenge certificate"></div>
         <div class="card__text paper">
           <h3>RoboCup and French Robotics Cup</h3>
@@ -192,15 +173,7 @@
           <p>I kept two autonomous robots running through multi-day tournaments and ensured their mechanical reliability. First in the scientific challenge, third in the Middle Size League.</p>
         </div>
       </article>
-      <article class="card">
-        <div class="media media--crop"><video autoplay muted loop playsinline><source src="assets/documents/competition-robotique.mp4" type="video/mp4"></video></div>
-        <div class="card__text paper">
-          <h3>School robotics competition</h3>
-          <span class="spec">Université de Toulon · 2022</span>
-          <p>Won with an autonomous robot built around a PIC32 microcontroller and programmed in C.</p>
-        </div>
-      </article>
-      <article class="card">
+      <article class="card reveal">
         <div class="media"><img src="assets/documents/buddyrobot.png" alt="The Buddy robot with the 8 by 8 distance-sensor grid on its screen"></div>
         <div class="card__text paper">
           <h3>Buddy robot</h3>
@@ -215,15 +188,15 @@
   <section id="background" class="section">
     <div class="section-head"><h2>Background</h2></div>
     <div class="background">
-      <div>
+      <div class="reveal">
         <h3 class="label">Experience</h3>
         <table class="cv-table">
-          <tr><td>Mar. to Sept. 2026</td><td><b><a href="https://caprarobotics.com">Capra Robotics</a></b>, Aarhus<span>R&amp;D robotics engineer, intern</span></td></tr>
+          <tr><td>Mar. to Aug. 2026</td><td><b><a href="https://caprarobotics.com">Capra Robotics</a></b>, Aarhus<span>R&amp;D robotics engineer, intern</span></td></tr>
           <tr><td>Sept. 2023 to Mar. 2026</td><td><b><a href="https://www.safran-group.com/companies/safran-data-systems">Safran Data Systems</a></b>, Les Ulis<span>R&amp;D innovation engineer, apprentice</span></td></tr>
           <tr><td>May to July 2023</td><td><b><a href="https://bluefrogrobotics.com">Blue Frog Robotics</a></b>, Paris<span>Embedded systems engineer, intern</span></td></tr>
         </table>
       </div>
-      <div>
+      <div class="reveal">
         <h3 class="label">Education</h3>
         <table class="cv-table">
           <tr><td>2026 to 2027</td><td><b><a href="https://www.sorbonne-universite.fr">Sorbonne Université</a> (ex-UPMC)</b><span>MSc in Robotics. Imitation learning, reinforcement learning, multimodal AI</span></td></tr>
@@ -236,13 +209,13 @@
 
   <!-- ================= CONTACT ================= -->
   <footer id="contact" class="contact">
-    <div class="contact__box paper">
+    <div class="contact__box paper reveal">
       <p class="contact__line">Building robots that learn? <a href="mailto:arthurmourgue0@gmail.com">Write to me.</a></p>
-      <p class="links"><a href="mailto:arthurmourgue0@gmail.com">email</a><a href="https://github.com/Arthur-Mourgue">github</a><a href="https://www.linkedin.com/in/arthur-mourgue/">linkedin</a><a href="assets/documents/cv_arthurmourgue.pdf">cv.pdf</a></p>
+      <p class="links"><a href="mailto:arthurmourgue0@gmail.com">email</a><a href="https://github.com/Arthur-Mourgue">github</a><a href="https://www.linkedin.com/in/arthur-mourgue/">linkedin</a><a href="assets/documents/Arthur_Mourgue_CV_industry.pdf">CV industry</a><a href="assets/documents/Arthur_Mourgue_CV_research.pdf">CV research</a></p>
     </div>
     <div class="contact__foot">
       <span class="label label--muted">Paris · open to moving anywhere</span>
       <span class="label label--muted">French native · English C2</span>
-      <span class="label label--muted">updated September 2026</span>
+      <span class="label label--muted">updated October 2026</span>
     </div>
   </footer>

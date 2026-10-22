@@ -44,8 +44,8 @@ body {
 }
 p { margin: 0; }
 h1, h2, h3 { margin: 0; line-height: 1.12; }
-a { color: var(--blue); text-underline-offset: 0.16em; text-decoration-thickness: 1px; }
-a:hover { text-decoration-thickness: 2px; }
+a { color: var(--blue); text-underline-offset: 0.16em; text-decoration-thickness: 1px; transition: color 180ms ease; }
+a:hover { text-decoration-thickness: 2px; color: color-mix(in srgb, var(--blue) 75%, var(--ink)); }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 img, video { display: block; max-width: 100%; }
 
@@ -53,6 +53,11 @@ img, video { display: block; max-width: 100%; }
 
 /* Text sitting on the crosses. The grid fades out behind it. */
 .paper { background: var(--paper); box-shadow: 0 0 20px 16px var(--paper); }
+
+/* Scroll reveal. The .js class is set in the head, so content stays visible
+   when JavaScript is unavailable. */
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 600ms ease, transform 600ms ease, translate 220ms ease, background-color 180ms ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
 
 /* Tactile background: the grid of little crosses lights up in blue near the
    cursor, across the whole page. --mx / --my are set by assets/js/site.js.
@@ -74,6 +79,31 @@ img, video { display: block; max-width: 100%; }
     -webkit-mask-image: radial-gradient(circle 140px at var(--mx, -1000px) var(--my, -1000px), #000 0%, transparent 100%);
             mask-image: radial-gradient(circle 140px at var(--mx, -1000px) var(--my, -1000px), #000 0%, transparent 100%);
   }
+}
+
+/* Ambient touch: a soft blue glow drifts across the cross grid, like a hand
+   touching the paper. It sits below the cursor glow and the click ripple. */
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("../img/crosses-accent.svg");
+  background-size: 28px 28px;
+  opacity: 0.35;
+  -webkit-mask-image: radial-gradient(circle 220px at 50% 50%, #000 0%, transparent 100%);
+          mask-image: radial-gradient(circle 220px at 50% 50%, #000 0%, transparent 100%);
+  -webkit-mask-size: 200% 200%;
+          mask-size: 200% 200%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  animation: ambient-touch 28s ease-in-out infinite alternate;
+}
+@keyframes ambient-touch {
+  0%   { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
+  50%  { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; }
+  100% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
 }
 
 /* Click ripple: a wave that turns the page's own crosses blue as it passes.
@@ -138,6 +168,12 @@ img, video { display: block; max-width: 100%; }
   padding: 24px; text-align: center;
   font: 0.75rem/1.6 var(--mono); color: var(--blue);
   overflow: hidden;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+.media:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue), 0 14px 34px rgba(26, 13, 171, 0.12);
+  transform: translateY(-2px);
 }
 /* With a real image or video, the frame hugs the media's own aspect ratio. */
 .media:has(img), .media:has(video) { border-style: solid; padding: 0; aspect-ratio: auto; }
@@ -153,6 +189,21 @@ img, video { display: block; max-width: 100%; }
    auto cross-axis margins replace the stretch and the frame would shrink to the
    image's intrinsic width instead of following the column. */
 .media--wide { width: 100%; max-width: 520px; margin-inline: auto; }
+/* Highlight sweep for the LaMain hand, a soft blue band moving top to bottom. */
+.media--sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, rgba(143, 162, 255, 0) 30%, rgba(143, 162, 255, 0.35) 50%, rgba(143, 162, 255, 0) 70%, transparent 100%);
+  transform: translateY(-100%);
+  animation: media-sweep 7s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+@keyframes media-sweep {
+  0%        { transform: translateY(-100%); }
+  55%, 100% { transform: translateY(100%); }
+}
 /* Two images side by side. */
 .media-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 20px); align-items: start; }
 
@@ -212,20 +263,24 @@ img, video { display: block; max-width: 100%; }
   background: var(--paper);
   border: 1px solid var(--blue);
 }
-.hero-nav a { font: 0.6875rem/1.4 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
-.hero-nav a:hover { text-decoration: underline; }
+.hero-nav a { font: 0.6875rem/1.4 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: color 180ms ease; }
+.hero-nav a:hover { text-decoration: underline; color: var(--ink); }
 .scroll-cue {
   position: absolute; bottom: clamp(20px, 3.5vh, 36px); left: 0;
   font: 0.6875rem/1.4 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
 }
 
-.intro { display: flex; flex-direction: column; gap: clamp(14px, 2.2vh, 22px); padding: 6px; }
+.intro { display: flex; flex-direction: column; gap: clamp(14px, 2.2vh, 22px); padding: 6px; animation: hero-in 700ms ease both; }
 .intro .me { font-weight: 700; }
 .intro h1 { font-size: var(--h1); font-weight: 700; letter-spacing: -0.005em; line-height: 1.2; }
 .intro .lead { font-size: var(--body); line-height: 1.55; }
 .intro .note { color: var(--muted); }
 
-.hand-figure { margin: 0; justify-self: end; width: min(100%, 60vh); width: min(100%, 60svh); }
+.hand-figure { margin: 0; justify-self: end; width: 100%; animation: hero-in 700ms 120ms ease both; }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
 /* z-index: 1 keeps the hand above the reactive background (body::before, z-index -1),
    so the crosses show through the drawing's empty gaps but never through its strokes. */
 .hand { position: relative; z-index: 1; isolation: isolate; aspect-ratio: 588 / 580; }
@@ -310,7 +365,9 @@ img, video { display: block; max-width: 100%; }
   background: var(--paper);
 }
 .sheet-table th { text-align: left; font-weight: 400; padding: 8px 12px; }
-.sheet-table td { padding: 12px; border-top: 1px solid var(--hair); vertical-align: top; }
+.sheet-table td { padding: 12px; border-top: 1px solid var(--hair); vertical-align: top; transition: color 180ms ease; }
+.sheet-table tbody tr { transition: background-color 180ms ease; }
+.sheet-table tbody tr:hover { background: color-mix(in srgb, var(--blue) 5%, var(--paper)); }
 .sheet-table tbody tr:hover td { color: var(--blue); }
 .is-live { color: var(--blue); }
 /* Slow blink for an in-progress status only. */
@@ -357,7 +414,8 @@ img, video { display: block; max-width: 100%; }
 .research__block { display: flex; flex-direction: column; gap: 14px; padding: 6px; }
 .research__block h3 { font-size: calc(var(--h2) * 0.8); font-weight: 700; }
 .papers { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--blue); border-bottom: 1px solid var(--blue); background: var(--paper); }
-.papers li { padding: 16px 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 24px; }
+.papers li { padding: 16px 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 24px; transition: background-color 180ms ease; }
+.papers li:hover { background: color-mix(in srgb, var(--blue) 5%, var(--paper)); }
 /* min-width: 0 on both, so they may shrink below their flex basis and content
    width instead of pushing the list wider than the viewport: the reference
    ("ETTC 2025, European Test and Telemetry Conference · co-author") is a long
@@ -372,9 +430,11 @@ img, video { display: block; max-width: 100%; }
    ========================================================================== */
 .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(28px, 3vw, 48px) clamp(20px, 2.4vw, 40px); }
 @media (max-width: 1200px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.card { display: flex; flex-direction: column; gap: 12px; }
+.card { display: flex; flex-direction: column; gap: 12px; transition: translate 220ms ease; }
+.card:hover { translate: 0 -4px; }
 .card__text { display: flex; flex-direction: column; gap: 6px; padding: 4px; }
-.card h3 { font-size: 1.125rem; font-weight: 700; }
+.card h3 { font-size: 1.125rem; font-weight: 700; transition: color 180ms ease; }
+.card:hover h3 { color: var(--blue); }
 .card p { font-size: 1rem; line-height: 1.5; }
 
 /* ==========================================================================
@@ -450,7 +510,16 @@ img, video { display: block; max-width: 100%; }
 }
 @media (max-width: 640px) {
   .col-year { display: none; }
-  .hero-nav { gap: 14px; }
+  body::after { animation: none; opacity: 0.2; }
+  .hero-nav {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 0;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 10px 12px;
+  }
   .cv-table td:first-child { width: 96px; white-space: normal; }
   .media-row { grid-template-columns: 1fr; }
 }
@@ -462,4 +531,10 @@ img, video { display: block; max-width: 100%; }
   .hand__notes .note { animation: none; }
   .hand__notes .note:first-of-type { opacity: 1; }
   .is-live--pulse { animation: none; }
+  body::after { animation: none; opacity: 0.2; }
+  .intro, .hand-figure { animation: none; }
+  .media--sweep::after { animation: none; opacity: 0; }
+  .media:hover { transform: none; }
+  .card:hover { translate: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
 }

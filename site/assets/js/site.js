@@ -1,7 +1,6 @@
 // Tactile background: the page-wide cross grid lights up in blue around the
 // cursor (see body::before in style.css). Tracking runs everywhere, including
-// over the hand; .hand::before is an opaque paper backing, masked by the
-// drawing, that keeps the crosses from showing through its strokes.
+// over the media; the paper backing keeps the crosses from showing through.
 (function () {
   if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
   var root = document.documentElement;
@@ -37,4 +36,26 @@
     });
     document.body.appendChild(ripple);
   });
+})();
+
+// Scroll reveal: sections, cards and list rows fade up once as they enter the
+// viewport. The .js class is set in the document head, so the initial hidden
+// state only applies when JavaScript is available. Skipped under
+// prefers-reduced-motion.
+(function () {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!("IntersectionObserver" in window)) return;
+
+  var targets = document.querySelectorAll(".reveal");
+  if (!targets.length) return;
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+  targets.forEach(function (el) { observer.observe(el); });
 })();

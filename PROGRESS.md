@@ -469,6 +469,36 @@
   gardent l'ancien texte (GNU Radio, légendes) et ne sont pas utilisés par le
   build ; `README.md` est vide ; `features.json` est vide ; `og.png` manque.
 
+## 2026-10-22 — vidéo LePotager en hero, ordre et contenus mis à jour
+- Fait : le hero affiche une boucle vidéo LePotager à la place du dessin LaMain,
+  avec le bloc « Currently building LaMain » juste en dessous. L'intro précise
+  la recherche de stage de six mois entre mars et mai 2027 et les intérêts de
+  recherche. Les specs LaMain passent à « designed for under 200 g » et
+  « designed for under €200 ». Selected work et les fiches passent dans l'ordre
+  LePotager, LaMain, Capra, Safran, avec les badges « On a real robot » et
+  « Published at ETTC 2025 », les tags réduits et la phrase sur les
+  démonstrations de récupération. La date Capra passe à « Mar. to Aug. 2026 »,
+  le projet « School robotics competition » est retiré, les liens CV industry
+  et CV research remplacent cv.pdf et la date passe à octobre 2026. Les deux
+  vidéos embarquées sont compressées, sans audio, en autoplay/muet/boucle avec
+  poster. La nav du hero passe sur plusieurs lignes en mobile.
+- Vérifié : `./scripts/check.sh` vert (8 tests).
+- Problèmes / à surveiller : les deux PDF CV sont pour l'instant des copies du
+  CV existant, à remplacer par les vraies versions industry et research. Les
+  GIF de LaMain et LePotager restent lourds (jusqu'à 8,4 Mo pour fail.gif).
+
+## 2026-10-22 — animations discrètes et interactions
+- Fait : halo bleu ambiant qui traverse lentement la grille de croix, entrée
+  du hero en fondu, révélation au scroll des fiches, cartes, papiers, colonnes
+  Background et bloc contact, balayage de surbrillance sur la main LaMain,
+  survol qui soulève et éclaire les médias, les cartes, les lignes du tableau
+  et les papiers, transitions de couleur sur les liens. L'animation ambiante
+  est coupée en mobile et tout est désactivé sous `prefers-reduced-motion`.
+  `css_version` 53, `js_version` 16.
+- Vérifié : `./scripts/check.sh` vert (8 tests), syntaxe JS et CSS contrôlées.
+- Problèmes / à surveiller : les changements de la demande précédente et
+  ceux-ci ne sont pas encore commités.
+
 ## AAAA-MM-JJ — F001
 - Fait : ...
 - Décisions prises : ...
