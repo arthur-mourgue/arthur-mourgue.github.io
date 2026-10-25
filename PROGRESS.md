@@ -515,6 +515,13 @@
   glow. `css_version` 55, `js_version` 17.
 - Vérifié : `./scripts/check.sh` vert (8 tests).
 
+## 2026-10-25 — nouveau CV.pdf
+- Fait : `site/assets/documents/cv_arthurmourgue.pdf` remplacé par la nouvelle
+  version (1 page, 145 Ko au lieu de 232 Ko). La phrase d'accroche du hero est
+  raccourcie dans `site-src/pages/index.body.html`, puis le site est reconstruit.
+- Vérifié : `./scripts/check.sh` vert (8 tests) ; texte du PDF contrôlé avec
+  `pdftotext`.
+
 ## AAAA-MM-JJ — F001
 - Fait : ...
 - Décisions prises : ...
