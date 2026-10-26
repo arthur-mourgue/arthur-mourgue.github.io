@@ -504,6 +504,9 @@ body::after {
 .pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: var(--section); padding-block: 20px 56px; border-top: 1px solid var(--blue); background: var(--paper); }
 
 /* ---------- Responsive ---------- */
+@media (min-width: 961px) {
+  .intro h1 { font-size: clamp(1.3125rem, 2vw, 1.8125rem); }
+}
 @media (max-width: 960px) {
   .hero { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
   .hand-figure { justify-self: center; width: min(100%, 440px); }

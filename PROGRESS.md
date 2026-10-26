@@ -536,3 +536,15 @@
   desktop pour 3 cartes, donc une colonne vide. Rien ajouté, comme demandé.
   Les hauteurs des rangées projet varient avec les ratios d'image, les blocs
   texte restent proches.
+
+## 2026-10-26 — compétition scolaire et hero sur une ligne
+- Fait : carte « School robotics competition » restaurée avec la vidéo en
+  boucle, texte sans PIC32. Titre du hero sur une ligne en desktop grâce à une
+  taille fluide plafonnée à 29 px, accroche raccourcie en « I build AI for
+  robots and run it on real hardware. ». La grille Other projects repasse à
+  quatre cartes. `css_version` 56.
+- Vérifié : `./scripts/check.sh` vert (8 tests) ; titre et accroche sur une
+  ligne de 1024 à 1920 px, accroche sur une ligne à 390 px ; quatre cartes sur
+  desktop ; aucun débordement horizontal ; aucun mot seul en fin de paragraphe.
+- Problèmes / à surveiller : le titre reste sur deux lignes sous 1024 px,
+  comportement mobile attendu.
