@@ -13,9 +13,6 @@ from pathlib import Path
 
 import build_site
 
-# Local references that are intentional content TODO placeholders.
-KNOWN_MISSING = {"cv.pdf"}
-
 COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 ATTR_RE = re.compile(r'(?:href|src)="([^"]+)"')
 P_RE = re.compile(r"<p\b[^>]*>(.*?)</p>", re.DOTALL)
@@ -53,7 +50,7 @@ class GeneratedSiteTest(unittest.TestCase):
                 if "{{" in url:
                     continue  # unfilled content placeholder, e.g. {{LAMAIN_GITHUB_URL}}
                 clean = url.split("?")[0].split("#")[0]
-                if not clean or clean in KNOWN_MISSING:
+                if not clean:
                     continue
                 with self.subTest(page=path, ref=url):
                     self.assertTrue((base / clean).exists(), f"{path}: broken reference {url}")

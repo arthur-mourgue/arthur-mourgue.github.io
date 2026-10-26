@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------
-# check.sh — THE source of truth for "is the code good?"
-# Used by: you, the agent, the pre-commit hook AND GitHub CI.
+# check.sh — run the project checks.
+# Used by the pre-commit hook and GitHub CI.
 # One command, everywhere the same → no "works on my machine".
 #
 # This project is a static site + offline image tools. There is no
@@ -15,10 +15,6 @@ cd "$(dirname "$0")/.."          # run from the project root
 fail=0
 step() { echo; echo "▶ $1"; }
 run()  { if ! "$@"; then echo "  ✗ FAIL: $*"; fail=1; fi; }
-
-# ---------- Agent task list must stay valid JSON
-step "features.json is valid JSON"
-run python3 -c "import json; json.load(open('features.json'))"
 
 # ---------- JS syntax (node --check, no imports executed)
 if compgen -G "site/assets/js/*.js" >/dev/null; then

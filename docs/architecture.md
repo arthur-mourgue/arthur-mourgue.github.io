@@ -21,7 +21,7 @@ tools/           offline pipeline + site generator
   build_site.py  site-src/ -> site/  (stdlib only)
   test_site.py   stdlib unittest tests for the generated site
   make_lineart.py, make_backing.py, duotone.sh  image pipeline
-scripts/         agent harness: check.sh, setup.sh
+scripts/         check.sh, setup.sh
 ```
 
 ### Data flow
@@ -35,9 +35,8 @@ static files; nothing in `site/` imports anything at runtime.
 assets. `site.js` holds two IIFEs, cursor tracking and the click ripple. The
 shared `<head>` and script tags are produced once from `site-src/layout.html`,
 so the five pages can no longer drift from each other.
-The visual system follows the "temporary" handoff: fluid `clamp()` sizes, a hero
-that fits exactly one screen, and the same paper / crosses / serif / one-blue
-direction.
+The visual system uses fluid `clamp()` sizes, a hero that fits exactly one
+screen, and the same paper / crosses / serif / one-blue direction.
 
 ## Why there is no automated architecture contract
 - `import-linter` needs a Python package with intra-package imports. `tools/`
@@ -52,7 +51,6 @@ Both were intentionally NOT installed. See `docs/decisions/0001-baseline.md`.
 - `tools/` outputs are not reproducible in CI (opencv/scipy/ffmpeg are not
   installed there); only `build_site.py` and `test_site.py` are stdlib-only.
 - `site/assets/img/og.png` is referenced but not committed yet.
-- `cv.pdf` is referenced but not committed yet.
 - `site-src/pages/*.body.html` still contain long single-line paragraphs; the
   generator preserves them verbatim rather than reformatting (no HTML formatter).
 
