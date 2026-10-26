@@ -9,10 +9,10 @@
   <section class="hero" aria-label="Introduction">
     <div class="intro paper">
       <p class="me">Arthur Mourgue</p>
-      <h1>Research Engineer in AI for Robotics</h1>
-      <p class="lead">I work on AI for robots, from training the models to making them work on real hardware.</p>
-      <p>Three years of R&amp;D at <a href="https://www.safran-group.com/companies/safran-data-systems">Safran</a>, six months in R&amp;D at <a href="https://caprarobotics.com">Capra Robotics</a> in Denmark, and now an MSc in Robotics at <a href="https://www.sorbonne-universite.fr">Sorbonne Université</a> (ex-UPMC). Currently building LaMain, a hand with touch sensors for the SO-101 arm.</p>
-      <p class="note">Looking for a six-month end-of-studies internship starting between March and May 2027.</p>
+      <h1>Robotics Engineer in AI and Perception</h1>
+      <p class="lead">I build AI for robots, from training the models to running them on real&nbsp;hardware.</p>
+      <p>Three years of R&amp;D at <a href="https://www.safran-group.com/companies/safran-data-systems">Safran</a>, six months in R&amp;D at <a href="https://caprarobotics.com">Capra Robotics</a> in Denmark, and now an MSc in Robotics at <a href="https://www.sorbonne-universite.fr">Sorbonne Université</a> (ex-UPMC). Currently building LaMain, a robot hand with touch sensors for the SO-101 arm.</p>
+      <p class="note">Looking for a 6-month end-of-studies internship from March&nbsp;2027.</p>
       <p class="links">
         <a href="assets/documents/cv_arthurmourgue.pdf">CV.pdf</a>
         <a href="https://github.com/Arthur-Mourgue">github</a>
@@ -41,7 +41,7 @@
           </div>
           <div class="hand-caption__right">
             <span class="hand-caption__tags">
-              <span class="hand-caption__tag">5 DOF</span>
+              <span class="hand-caption__tag">5 DoF</span>
               <span class="hand-caption__tag">designed for under 200 g</span>
               <span class="hand-caption__tag">designed for under €200</span>
             </span>
@@ -59,7 +59,7 @@
       <tbody>
         <tr><td><a href="#sheet-01">LePotager</a>, robot arm that sorts fruit by touch</td><td class="col-year">2026</td><td class="is-live">● Won Most Creative Project</td></tr>
         <tr><td><a href="#sheet-02">LaMain</a>, open-source robot hand with touch for the SO-101 arm</td><td class="col-year">2026</td><td class="is-live is-live--pulse">● Building</td></tr>
-        <tr><td><a href="#sheet-03">Capra Robotics</a>, computer vision and localisation on autonomous mobile robots</td><td class="col-year">2026</td><td class="is-live">● Running</td></tr>
+        <tr><td><a href="#sheet-03">Capra Robotics</a>, computer vision and localisation on autonomous mobile robots</td><td class="col-year">2026</td><td class="is-live">● Made docking fully automatic</td></tr>
         <tr><td><a href="#sheet-04">Safran</a>, programming flight-test hardware in plain English</td><td class="col-year">2023 to 2025</td><td class="is-live">● Published at ETTC 2025</td></tr>
       </tbody>
     </table>
@@ -67,13 +67,14 @@
     <article id="sheet-01" class="sheet reveal" aria-labelledby="s1">
       <div class="sheet__text paper">
         <h3 id="s1">LePotager</h3>
-        <p>In 48 hours at a LeRobot hackathon, we built a robot arm that sorts fruit by pressing it. Colour can lie about ripeness, touch does not.</p>
-        <p>The policy is an imitation learning model trained on camera images and a low-cost pressure sensor. We also learned that too many recovery demonstrations taught the policy to miss the fruit.</p>
+        <p>In 48 hours at the LeRobot hackathon in Copenhagen, we built a robot arm that sorts fruit by pressing it. Colour can lie about ripeness, touch does not.</p>
+        <p>Our ACT imitation learning policy takes both the camera images and the tactile feedback of an experimental piezoresistive sensor as&nbsp;input.</p>
         <div class="sheet__tags">
+          <span>Imitation learning</span>
           <span>ACT</span>
+          <span>Tactile sensing</span>
           <span>LeRobot</span>
-          <span>SO-101</span>
-          <span>piezoresistive sensor</span>
+          <span>PyTorch</span>
         </div>
         <p class="links"><a class="more" href="projects/lepotager.html">Read the full sheet</a><a class="more" href="https://github.com/Arthur-Mourgue/LePotager">GitHub</a></p>
       </div>
@@ -85,12 +86,14 @@
     <article id="sheet-02" class="sheet reveal" aria-labelledby="s2">
       <div class="sheet__text paper">
         <h3 id="s2">LaMain</h3>
-        <p>An open-source three-finger hand for the SO-101 arm, designed with <a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a>. It is designed to stay under 200 grams so the arm can still lift objects, and it carries touch sensors on the fingertips.</p>
-        <p>The goal is to train robot learning models with touch, from imitation learning to vision-language-action models.</p>
+        <p>An open-source 3-finger hand for the SO-101 arm, designed with <a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a>. It is fully 3D-printable, has 5 DoF and stays under 200 g, so the arm can still lift objects.</p>
+        <p>The goal is to train manipulation policies with touch, from imitation learning to vision-language-action models. The first prototype works, and tactile sensors are now being fitted on the&nbsp;fingertips.</p>
         <div class="sheet__tags">
-          <span>FlexiTac</span>
+          <span>Dexterous manipulation</span>
+          <span>Tactile sensing</span>
+          <span>Robot learning</span>
           <span>LeRobot</span>
-          <span>PyTorch</span>
+          <span>3D printing</span>
         </div>
         <p class="links"><a class="more" href="projects/lamain.html">Read the full sheet</a><a class="more" href="https://github.com/Arthur-Mourgue/LaMain">GitHub</a></p>
       </div>
@@ -102,14 +105,14 @@
     <article id="sheet-03" class="sheet reveal" aria-labelledby="s3">
       <div class="sheet__text paper">
         <h3 id="s3">Capra Robotics</h3>
-        <p>Six months on autonomous mobile robots in Denmark. I trained a segmentation model that lets the robot see obstacles its LiDAR misses, on a dataset built with ten times less manual labelling.</p>
-        <p>I also moved face and plate anonymisation inside the camera, and built the localisation that lets the robot dock to a food cart, 18 times out of 18 in tests.</p>
+        <p>Six months on autonomous mobile robots in Denmark. I built a dataset with 10 times less manual labelling and trained a semantic segmentation model on it, so the robot sees the obstacles its LiDAR&nbsp;misses.</p>
+        <p>I also built the LiDAR localisation that made food-cart docking fully automatic, with 18 successful dockings out of 18 in a 1-hour&nbsp;trial.</p>
         <div class="sheet__tags">
-          <span>SegFormer</span>
-          <span>YOLOX</span>
+          <span>Semantic segmentation</span>
+          <span>Localisation</span>
           <span>ROS 2</span>
-          <span>Jetson Orin Nano</span>
-          <span>OAK-D</span>
+          <span>LiDAR</span>
+          <span>NVIDIA Jetson</span>
         </div>
         <a class="more" href="projects/capra.html">Read the full sheet</a>
       </div>
@@ -121,12 +124,14 @@
     <article id="sheet-04" class="sheet reveal" aria-labelledby="s4">
       <div class="sheet__text paper">
         <h3 id="s4">Safran</h3>
-        <p>At <a href="https://www.safran-group.com/companies/safran-data-systems">Safran</a>, flight-test engineers can program an on-board computer, but only in C. The project lets them describe what they want in plain English.</p>
-        <p>A local language model turns the request into blocks they can check and edit, and the blocks become embedded C++.</p>
+        <p>At <a href="https://www.safran-group.com/companies/safran-data-systems">Safran</a>, flight-test engineers can program an on-board computer, but only in C. This project lets them describe what they want in plain&nbsp;English.</p>
+        <p>A local LLM turns each request into blocks they can check and edit, and the blocks become embedded C++. Letting the LLM only understand the request, rather than write the code, raised the success rate from about 35% to over 90%.</p>
         <div class="sheet__tags">
-          <span>Llama 3 8B</span>
-          <span>C++</span>
-          <span>ARM</span>
+          <span>LLM</span>
+          <span>NLP</span>
+          <span>Code generation</span>
+          <span>Embedded C++</span>
+          <span>Python</span>
         </div>
         <a class="more" href="projects/dagobert.html">Read the full sheet</a>
       </div>
@@ -164,7 +169,7 @@
         <div class="card__text paper">
           <h3>Water quality monitoring</h3>
           <span class="spec">INSA Lyon · 2026</span>
-          <p>A vision pipeline that detects gammarids, small crustaceans used to monitor water quality. YOLOv11-N and MobileNetV3, about 90% accuracy. Code on <a href="https://github.com/Arthur-Mourgue/biomae-gammarus">GitHub</a>.</p>
+          <p>A computer vision pipeline that detects and classifies gammarids, small crustaceans used to monitor water quality, with about 90% accuracy. Code on <a href="https://github.com/Arthur-Mourgue/biomae-gammarus">GitHub</a>.</p>
         </div>
       </article>
       <article class="card reveal">
@@ -172,15 +177,7 @@
         <div class="card__text paper">
           <h3>RoboCup and French Robotics Cup</h3>
           <span class="spec">Robot Club Toulon · 2022 to 2023</span>
-          <p>I kept two autonomous robots running through multi-day tournaments and ensured their mechanical reliability. First in the scientific challenge, third in the Middle Size League.</p>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="media media--crop"><video autoplay muted loop playsinline poster="assets/documents/competition-robotique-poster.jpg"><source src="assets/documents/competition-robotique.mp4" type="video/mp4"></video></div>
-        <div class="card__text paper">
-          <h3>School robotics competition</h3>
-          <span class="spec">Université de Toulon · 2022</span>
-          <p>Won with an autonomous robot built around a PIC32 microcontroller and programmed in C.</p>
+          <p>I kept two autonomous robots running through multi-day tournaments and ensured their mechanical reliability. We won the scientific challenge and finished 3rd in the Middle Size&nbsp;League.</p>
         </div>
       </article>
       <article class="card reveal">
@@ -188,7 +185,7 @@
         <div class="card__text paper">
           <h3>Buddy robot</h3>
           <span class="spec">Blue Frog Robotics · 2023</span>
-          <p>A 64-zone distance sensor in the head of a social robot, from the driver to a gesture detector that triggers the robot's behaviours.</p>
+          <p>An 8×8 time-of-flight sensor in the head of a social robot, from the I2C driver in C to a gesture detector that triggers the robot's&nbsp;behaviours.</p>
         </div>
       </article>
     </div>
@@ -210,8 +207,8 @@
         <h3 class="label">Education</h3>
         <table class="cv-table">
           <tr><td>2026 to 2027</td><td><b><a href="https://www.sorbonne-universite.fr">Sorbonne Université</a> (ex-UPMC)</b><span>MSc in Robotics. Imitation learning, reinforcement learning, multimodal AI</span></td></tr>
-          <tr><td>2023 to 2026</td><td><b><a href="https://www.insa-lyon.fr">INSA Lyon</a></b><span>Engineering degree, electrical engineering, signal and image processing</span></td></tr>
-          <tr><td>2021 to 2023</td><td><b><a href="https://www.univ-tln.fr">Université de Toulon</a></b><span>BUT GEII, electronics and embedded systems</span></td></tr>
+          <tr><td>2023 to 2026</td><td><b><a href="https://www.insa-lyon.fr">INSA Lyon</a></b><span>MSc in Electrical Engineering. Specialisation in artificial intelligence</span></td></tr>
+          <tr><td>2021 to 2023</td><td><b><a href="https://www.univ-tln.fr">Université de Toulon</a></b><span>BSc in Electrical Engineering. Electronics and embedded systems</span></td></tr>
         </table>
       </div>
     </div>

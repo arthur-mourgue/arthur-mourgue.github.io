@@ -23,25 +23,25 @@
       <div><span class="label">Title</span><h1 class="name">LaMain</h1></div>
       <span>prototype v1 · building</span>
     </div>
-    <div class="titleblock__cell"><span class="label">Part</span><span>Three-finger hand for the SO-101</span></div><div class="titleblock__cell"><span class="label">Team</span><span><a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a> and me</span></div><div class="titleblock__cell"><span class="label">Stack</span><span>Feetech servos · FlexiTac · LeRobot</span></div><div class="titleblock__cell"><span class="label">Date</span><span>2026</span></div>
+    <div class="titleblock__cell"><span class="label">Part</span><span>3-finger hand for the SO-101</span></div><div class="titleblock__cell"><span class="label">Team</span><span><a href="https://www.linkedin.com/in/julien-navet/">Julien Navet</a> and me</span></div><div class="titleblock__cell"><span class="label">Stack</span><span>Feetech servos · FlexiTac · LeRobot</span></div><div class="titleblock__cell"><span class="label">Date</span><span>2026</span></div>
   </header>
 
   <p class="article-lead">An open-source robot hand with touch, light enough to go on the SO-101 arm.</p>
 
   <article class="prose">
     <h2>Why a hand</h2>
-    <p>Robot learning has plenty of text and video, but very little data of hands grasping, pressing and adjusting their grip. Egocentric video is cheap to collect, yet a camera cannot feel anything and the fingers are often hidden. Teleoperation records what the motors do, but it is slow and expensive.</p>
-    <p>Touch is the missing signal. A lab that wants to study dexterous manipulation with touch usually buys an expensive hand, adds tactile sensors and mounts it on an industrial arm that costs around €20,000. Very few people can do that, which is also why many tactile benchmarks do not use hands at all.</p>
+    <p>Robot learning has plenty of text and video, but very little data of hands grasping, pressing and adjusting their grip. Egocentric video is cheap to collect, yet a camera cannot feel anything and the fingers are often hidden. Teleoperation records what the motors do, but it is slow and&nbsp;expensive.</p>
+    <p>Touch is the missing signal. A lab that wants to study dexterous manipulation with touch usually buys an expensive hand, adds tactile sensors and mounts it on an industrial arm that costs around €20,000. Very few people can do that, which is also why many tactile benchmarks do not use hands at&nbsp;all.</p>
     <h2>Why the SO-101</h2>
-    <p>The SO-101 is the arm of the LeRobot project from Hugging Face. It is one of the most widely used open-source robot arms, and many students and engineers learn robot learning on it. Schools buy it by the dozen.</p>
-    <p>A real hand with touch on this arm would let anyone record tactile manipulation data, and that data could feed open models for dexterous manipulation. This is the idea behind LaMain.</p>
+    <p>The SO-101 is the arm of the LeRobot project from Hugging Face. It is one of the most widely used open-source robot arms, and many students and engineers learn robot learning on it. Schools buy it by the&nbsp;dozen.</p>
+    <p>A real hand with touch on this arm would let anyone record tactile manipulation data, and that data could feed open models for dexterous manipulation. This is the idea behind&nbsp;LaMain.</p>
     <h2>What already exists</h2>
-    <p>Pollen Robotics designed the Amazing Hand, an open-source hand that inspired this project. It weighs about 400 grams and has no touch sensors. The SO-101 is a small arm, so with this hand there is almost nothing left to lift.</p>
+    <p>Pollen Robotics designed the Amazing Hand, an open-source hand that inspired this project. It weighs about 400 g and has no touch sensors. The SO-101 is a small arm, so with this hand there is almost nothing left to lift.</p>
     <p>The Barrett Hand also has three fingers, but it is not shaped like a human hand. We wanted an anthropomorphic hand on purpose. A hand shaped like ours can be teleoperated from a human hand, and its data can be linked with egocentric video of people doing the same task.</p>
     <h2>The goals</h2>
-    <p>We set three targets. The hand must weigh less than 200 grams, cost less than €200 and carry tactile sensors. It also has to follow the LeRobot conventions so the community can pick it up easily.</p>
+    <p>We set three targets. The hand must weigh less than 200 g, cost less than €200 and carry tactile sensors. It also has to follow the LeRobot conventions so the community can pick it up&nbsp;easily.</p>
     <h2>The design</h2>
-    <p>LaMain has three fingers and is underactuated. Five servos give five degrees of freedom. One servo bends the index finger, one bends the middle finger, one spreads both fingers apart, and two servos in series move the thumb.</p>
+    <p>LaMain has three fingers and is underactuated. Five servos give 5 DoF. One servo bends the index finger, one bends the middle finger, one spreads both fingers apart, and two servos in series move the&nbsp;thumb.</p>
     <p>We started from the Amazing Hand architecture and reused its parts where we could. Pollen did real engineering work on it, and reusing parts keeps the cost down. The main difference is the actuation. The Amazing Hand drives each finger with two small servos. We use one servo per finger to save weight, but a single small servo does not have enough torque to hold an object. We moved to larger Feetech servos.</p>
     <p>This is the main trade-off of the project. Small servos are light, so the arm can still lift things, but the hand cannot grip. Large servos grip well, but the hand becomes too heavy for the arm. We are looking for the point where both work. Spreading the two fingers with a single servo also needed a new mechanism, designed by Julien Navet.</p>
     <figure>
@@ -50,11 +50,11 @@
     <h2>Touch</h2>
     <p>The first tactile sensor is FlexiTac, a flexible piezoresistive sensor that changes resistance when pressed. Later we want to compare it with other tactile skins.</p>
     <h2>Software and data</h2>
-    <p>My part is integration. I am adding LaMain to LeRobot as a new robot, with a dataset format that records servo positions and tactile signals together. Imitation learning policies can then learn from both.</p>
+    <p>My part is integration. I am adding LaMain to LeRobot as a new robot, with a dataset format that records servo positions and tactile signals together. Imitation learning policies can then learn from&nbsp;both.</p>
     <p>Once the hand works, I will record a first large dataset and compare LaMain with the standard SO-101 gripper on the same tasks.</p>
     <h2>Learning on the hand</h2>
-    <p>The hand is a means, not the goal. The goal is to learn manipulation with touch. I will start with ACT, the imitation learning model I used at the LeRobot hackathon, as a baseline. Then I plan to fine-tune a vision-language-action model on the data recorded with the hand. LeRobot already supports several of them, such as SmolVLA and π0.</p>
-    <p>Recent research also adds touch as an input to these models. The first question I want to answer with LaMain is simple. On the same tasks, does the same policy do better with touch than without it?</p>
+    <p>The hand is a means, not the goal. The goal is to learn manipulation with touch. I will start with ACT, the imitation learning model I used at the LeRobot hackathon, as a baseline. Then I plan to fine-tune a vision-language-action model on the data recorded with the hand. LeRobot already supports several of them, such as SmolVLA and&nbsp;π0.</p>
+    <p>Recent research also adds touch as an input to these models. The first question I want to answer with LaMain is simple. On the same tasks, does the same policy do better with touch than without&nbsp;it?</p>
     <h2>Where it stands</h2>
     <p>The parts are ordered and the first assembly comes next. The weight and cost above are targets, not measurements. I will assemble the hand, report the problems to Julien and iterate. The goal is a hand that can grasp objects by the end of November 2026. Then we can start recording data.</p>
     <p>LaMain is designed with Julien Navet, who does the mechanical design. I handle the assembly, the tests, the LeRobot integration and the datasets. I will document every step on this page and on <a href="https://github.com/Arthur-Mourgue/LaMain">GitHub</a>, where the bill of materials and the design files are.</p>

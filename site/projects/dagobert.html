@@ -31,15 +31,15 @@
   <article class="prose">
     <h2>The context</h2>
     <p>I spent three years as an R&amp;D apprentice in the innovation team of Safran Data Systems. The company makes flight-test instrumentation, the equipment that records data during the test flights of new aircraft.</p>
-    <p>One of its products is a modular acquisition system called XMA. One of its modules, the OBP, is a small on-board computer. It can convert raw sensor values into physical units, run frequency analyses, or keep only the important data before it is sent to the ground.</p>
+    <p>One of its products is a modular acquisition system called XMA. One of its modules, the OBP, is a small on-board computer. It can convert raw sensor values into physical units, run frequency analyses, or keep only the important data before it is sent to the&nbsp;ground.</p>
     <p>One example shows why this matters. When engineers study how a wing vibrates, the wing can be damaged if it stays too long at its resonant frequency. Usually the data is sent to the ground, analysed there, and then the pilot is told to slow down. That takes time. If the analysis runs on board, the alarm can reach the pilot much faster.</p>
     <h2>The problem</h2>
-    <p>The OBP is powerful, but it has to be programmed in C or C++. Most flight-test engineers do not write C. A very useful tool stays out of reach for the people who need it. My project was a proof of concept to change that. The idea was to let engineers describe what they want in plain English and turn that description into a program for the OBP.</p>
+    <p>The OBP is powerful, but it has to be programmed in C or C++. Most flight-test engineers do not write C. A very useful tool stays out of reach for the people who need it. My project was a proof of concept to change that. The idea was to let engineers describe what they want in plain English and turn that description into a program for the&nbsp;OBP.</p>
     <h2>The constraints</h2>
     <p>Three constraints shaped the design. Test data and programs are sensitive, so a cloud service like ChatGPT was not an option. The language model had to run locally, on a company machine, which limited us to models of about 8 billion parameters.</p>
     <p>A language model is never fully predictable. A small change in the request can change the answer, and in flight testing a random bug is not acceptable. So the model would only understand the request. It would never write the code itself. The engineer also had to see what would run on the aircraft and change it if needed.</p>
     <h2>How it works</h2>
-    <p>The engineer types a request, for example "take one input, compute the average over five values, and send the result to an output". A local language model turns this sentence into a structured file that lists the processing blocks and how they are connected. The model receives a prompt with a few examples of requests and correct answers before each question.</p>
+    <p>The engineer types a request, for example "take one input, compute the average over five values, and send the result to an output". A local language model turns this sentence into a structured file that lists the processing blocks and how they are connected. The model receives a prompt with a few examples of requests and correct answers before each&nbsp;question.</p>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Safran/dagobert-02-etape-langage-naturel-vers-yaml.png" alt="A plain-English sentence becomes a structured YAML file listing an input, a mean and an output"></div>
     </figure>
@@ -47,7 +47,7 @@
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Safran/dagobert-03-etape-blocs-editables.png" alt="The chain opens as editable blocks, and the engineer can change them"></div>
     </figure>
-    <p>A Python script turns the blocks into C++ code. To keep the generation simple and safe, I wrote a small C++ library where each type of block is a class. An input, an average or a maximum each has its own class, and each block passes its results to the next one. The script also writes the configuration file that describes the inputs and outputs. The code is cross-compiled for the ARM processor of the OBP and loaded with Safran's configuration software.</p>
+    <p>A Python script turns the blocks into C++ code. To keep the generation simple and safe, I wrote a small C++ library where each type of block is a class. An input, an average or a maximum each has its own class, and each block passes its results to the next one. The script also writes the configuration file that describes the inputs and outputs. The code is cross-compiled for the ARM processor of the OBP and loaded with Safran's configuration&nbsp;software.</p>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Safran/dagobert-04-etape-cpp-xml-televersement.png" alt="The blocks become XML and C++ code, then the program is loaded on the OBP hardware"></div>
     </figure>
@@ -60,7 +60,7 @@
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Safran/dagobert-05-chaine-semi-complete-mai-2024.png" alt="A semi-complete version of the chain, from the sentence to the generated code, May 2024"></div>
     </figure>
-    <p>The choice of model made a big difference. A small model gave the right answer only 30 to 40% of the time and took about a minute per request on an office computer. A Llama 3 model on a more powerful workstation reached 90 to 95% with a better prompt and answered in 3 to 5 seconds.</p>
+    <p>The choice of model made a big difference. A small model gave the right answer only 30 to 40% of the time and took about a minute per request on an office computer. A larger local LLM on a more powerful workstation reached 90 to 95% with a better prompt and answered in 3 to 5&nbsp;seconds.</p>
     <p>This work led to a paper that I co-authored at ETTC 2025, the European Test and Telemetry Conference, where I presented it. The proof of concept supports a small set of blocks and covers one or two of the main uses of the OBP. During the same apprenticeship I also designed FPGA logic for real-time current and voltage acquisition on flight-test equipment.</p>
     <p><a href="https://conference-ettc.org/ettc-2025/program/detailed-program/#:~:text=Arthur%20Mourgue">Read the paper</a>.</p>
   </article>

@@ -522,7 +522,17 @@
 - Vérifié : `./scripts/check.sh` vert (8 tests) ; texte du PDF contrôlé avec
   `pdftotext`.
 
-## AAAA-MM-JJ — F001
-- Fait : ...
-- Décisions prises : ...
-- Problèmes / à surveiller : ...
+## 2026-10-26 — textes du portfolio harmonisés
+- Fait : hero, statut Capra, textes et tags des quatre cartes projet, autres
+  projets, éducation et footer alignés sur la demande. Noms de modèles niche
+  retirés de l'accueil et des fiches, ponctuation nettoyée, résultats en
+  chiffres, « ten times » et « five times » passés en chiffres dans la fiche
+  Capra, et veuves corrigées par des espaces insécables dans les fiches. Site
+  reconstruit.
+- Vérifié : `./scripts/check.sh` vert (8 tests) ; audit des `:`, `;`, `—`, `–`
+  et `|` ainsi que des noms niche ; captures desktop 1440 et mobile 390 ;
+  aucun paragraphe avec un mot seul sur la dernière ligne de 360 à 1920 px.
+- Problèmes / à surveiller : la grille « Other projects » garde 4 colonnes en
+  desktop pour 3 cartes, donc une colonne vide. Rien ajouté, comme demandé.
+  Les hauteurs des rangées projet varient avec les ratios d'image, les blocs
+  texte restent proches.

@@ -11,7 +11,7 @@
     <div class="titleblock__cell"><span class="label">Event</span><span>LeRobot hackathon</span></div><div class="titleblock__cell"><span class="label">Where</span><span>Copenhagen</span></div><div class="titleblock__cell"><span class="label">Team</span><span><a href="https://www.linkedin.com/in/dogaozbek/">Doga Ozbek</a>, <a href="https://www.linkedin.com/in/hakanyanik/">Hakan Yanik</a>, <a href="https://www.linkedin.com/in/josevasq/">José Vasquez</a> and me</span></div><div class="titleblock__cell"><span class="label">Date</span><span>June 2026</span></div>
   </header>
 
-  <p class="article-lead">A robot arm that sorts fruit by touch, built in 48 hours.</p>
+  <p class="article-lead">A robot arm that sorts fruit by touch, built in 48&nbsp;hours.</p>
 
   <article class="prose">
     <h2>The hackathon</h2>
@@ -19,17 +19,17 @@
     <h2>The problem</h2>
     <p>In fruit processing plants, the most common way to check a fruit is a camera that looks at its colour. This wastes a lot of food. Some fruit looks dull but is perfectly good. Other fruit looks great but is soft inside. Colour does not tell you how firm a fruit is. Touch does.</p>
     <h2>What we built</h2>
-    <p><a href="https://www.linkedin.com/in/dogaozbek/">Doga Ozbek</a> is doing his PhD on a low-cost, open-source pressure sensor made of Velostat, a material whose resistance changes when it is pressed. We put this sensor on the tip of the SO-101 gripper.</p>
+    <p><a href="https://www.linkedin.com/in/dogaozbek/">Doga Ozbek</a> is doing his PhD on a low-cost, open-source pressure sensor made of Velostat, a material whose resistance changes when it is pressed. We put this sensor on the tip of the SO-101&nbsp;gripper.</p>
     <p>Fruits are dropped in a zone. The arm picks one up and places it in a test zone. It presses the fruit three times to measure how firm it is, then sorts it by firmness. The sensor is read by an ESP32 microcontroller, which sends the values to the computer over a serial link. We write them into the dataset next to the camera images.</p>
     <p>The policy is ACT, an imitation learning model available in LeRobot. We trained it on 50 demonstrations, each with camera images and tactile data.</p>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/LePotager/sensing.gif" alt="The SO-101 gripper pressing an orange, with the live pressure signal plotted below"></div>
     </figure>
     <h2>Why the cameras matter</h2>
-    <p>With this kind of model, the view must stay exactly the same between training and use. If a camera moves even a little, the background changes and the policy can fail completely. We used two cameras. One sits on the wrist and moves with the gripper. The other is fixed above the scene and sees everything. It is a RealSense depth camera, and it has to stay perfectly still.</p>
+    <p>With this kind of model, the view must stay exactly the same between training and use. If a camera moves even a little, the background changes and the policy can fail completely. We used two cameras. One sits on the wrist and moves with the gripper. The other is fixed above the scene and sees everything. It is a RealSense depth camera, and it has to stay perfectly&nbsp;still.</p>
     <h2>What went wrong</h2>
     <p>The servo IDs were not set correctly, so we had to reconfigure them by hand before we could teleoperate the arm. The overhead camera was fixed on top of delivery boxes with tape. We collected our data, trained the policy and everything worked. The next morning the camera had fallen, pulled down by its own weight. The view was different, so the whole dataset was useless. We had to record everything again.</p>
-    <p>The third problem was more interesting. I had read a paper showing that demonstrations of error recovery make a policy more robust. The idea is to show the robot how to correct itself after a mistake. We added many recovery demonstrations. We added too many. In the data, recovering from a mistake became more common than grasping the fruit correctly. The robot learned that behaviour. It kept moving next to the fruit and then coming back, every single time.</p>
+    <p>The third problem was more interesting. I had read a paper showing that demonstrations of error recovery make a policy more robust. The idea is to show the robot how to correct itself after a mistake. We added many recovery demonstrations. We added too many. In the data, recovering from a mistake became more common than grasping the fruit correctly. The robot learned that behaviour. It kept moving next to the fruit and then coming back, every single&nbsp;time.</p>
     <p>A policy does what the data shows most often. The balance of the demonstrations matters as much as their quality.</p>
     <figure>
       <div class="media"><img src="../assets/documents/LePotager/fail.gif" alt="The robot moving next to the fruit and coming back instead of grasping it"></div>

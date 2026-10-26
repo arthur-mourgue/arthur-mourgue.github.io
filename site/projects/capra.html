@@ -30,7 +30,7 @@
 
   <article class="prose">
     <h2>The context</h2>
-    <p>I spent six months at Capra Robotics in Aarhus, Denmark, a company of about 45 people that builds autonomous mobile robots for indoor and outdoor logistics. Their software runs on ROS 2, with Zenoh for communication, inside Docker containers.</p>
+    <p>I spent six months at Capra Robotics in Aarhus, Denmark, a company of about 45 people that builds autonomous mobile robots for indoor and outdoor logistics. Their software runs on ROS 2 inside Docker containers.</p>
     <p>On all three missions I built the simplest end-to-end chain that worked on the robot, then improved one piece at a time.</p>
     <h2>Seeing what the LiDAR cannot see</h2>
     <p>The robots navigate mainly with LiDAR. A LiDAR detects walls and large obstacles, but it misses low ones such as a plank on the floor or a kerb. It also makes the opposite mistake and treats a ramp or tall grass as a wall.</p>
@@ -43,43 +43,43 @@
       <div class="media"><img src="../assets/documents/Capra/segmentation-03-probleme-pierre.png" alt="A small stone on the floor that the LiDAR reads as an obstacle"></div>
       <div class="media"><img src="../assets/documents/Capra/segmentation-04-probleme-rampe.png" alt="A gentle ramp that the LiDAR reads as a wall"></div>
     </figure>
-    <p>The first version ran in Python on the robot's main computer at less than one image per second. It was slow, but it proved the idea. The robot stopped in front of a plank that its LiDAR could not see.</p>
+    <p>The first version ran in Python on the robot's main computer at less than one image per second. It was slow, but it proved the idea. The robot stopped in front of a plank that its LiDAR could not&nbsp;see.</p>
     <figure>
       <div class="media"><img src="../assets/documents/Capra/segmentation-05-pipeline-premiere-version.png" alt="The first segmentation pipeline, from the camera image to the obstacle added to the navigation map"></div>
     </figure>
-    <p>Generic models did not work well on the robot's images, so I built a dataset. I labelled 183 images by hand, including difficult cases such as stairs and door sills. I trained a large model on them and used it to label the next batch automatically. I corrected its mistakes, trained again and repeated the process. The final dataset had 1,840 images, with about ten times less manual labelling than doing it all by hand.</p>
-    <p>I compared four families of segmentation models on the same data. SegFormer gave the best results. The most interesting result was about data. With the larger dataset, the smallest SegFormer improved more than it would have by switching to a model 17 times bigger. More data beat a bigger model.</p>
-    <p>I also changed the training loss. The first masks had holes in the ground areas, so I added a term that measures how well the shapes overlap. This removed most of the holes. The final model is SegFormer B0 at the camera's native resolution of 848 by 480 pixels. It reaches an IoU of 0.981 on 367 images it never saw during training, and runs at 5.7 images per second on the Jetson Orin Nano.</p>
+    <p>Generic models did not work well on the robot's images, so I built a dataset. I labelled 183 images by hand, including difficult cases such as stairs and door sills. I trained a large model on them and used it to label the next batch automatically. I corrected its mistakes, trained again and repeated the process. The final dataset had 1,840 images, with about 10 times less manual labelling than doing it all by&nbsp;hand.</p>
+    <p>I compared four families of segmentation models on the same data. SegFormer gave the best results. The most interesting result was about data. With the larger dataset, the smallest SegFormer improved more than it would have by switching to a model 17 times bigger. More data beat a bigger&nbsp;model.</p>
+    <p>I also changed the training loss. The first masks had holes in the ground areas, so I added a term that measures how well the shapes overlap. This removed most of the holes. The final model is SegFormer B0 at the camera's native resolution of 848 by 480 pixels. It reaches an IoU of 0.981 on 367 images it never saw during training, and runs at 5.7 images per second on an NVIDIA&nbsp;Jetson.</p>
     <figure class="media-row">
       <div class="media"><img src="../assets/documents/Capra/segmentation-06-modele-generique.png" alt="A generic segmentation model labelling the floor as a rug, water and sky"></div>
       <div class="media"><img src="../assets/documents/Capra/segmentation-07-modele-finetune-sol.png" alt="The fine-tuned model labelling the whole floor as ground"></div>
     </figure>
     <h2>Anonymising images inside the camera</h2>
     <p>ARLI is a robot that drives along city sidewalks and scans them to keep a digital model of the city up to date. The project is funded by the European Space Agency, with the Technical University of Denmark and the City of Aarhus.</p>
-    <p>The robot needs a front camera, so it films people and cars. European data protection law requires faces and number plates to be blurred. The earlier the blurring happens, the less there is to protect. The usual setup detects faces on the camera and blurs them on the robot's computer, which means clear images still leave the camera. The goal was to do everything inside the camera.</p>
-    <p>The camera is an OAK-D. Its vision chip can only run a limited set of operations. It has 512 megabytes of memory, and its two small processors have no vector instructions. The model also had to allow commercial use, which ruled out recent YOLO versions under the AGPL licence.</p>
-    <p>I fine-tuned YOLOX-S, a detection model under a permissive licence, to detect faces and number plates. The training data combined public datasets with 920 images from the robot, labelled automatically. The two classes were not equally represented, so I weighted the training loss to balance them. I converted the model step by step from PyTorch to ONNX to OpenVINO and finally to a 16-bit format that the camera's chip can run. Detection runs on the vision chip. Blurring and compression run on the small processors. Only the blurred stream leaves the camera.</p>
+    <p>The robot needs a front camera, so it films people and cars. European data protection law requires faces and number plates to be blurred. The earlier the blurring happens, the less there is to protect. The usual setup detects faces on the camera and blurs them on the robot's computer, which means clear images still leave the camera. The goal was to do everything inside the&nbsp;camera.</p>
+    <p>The camera's vision chip can only run a limited set of operations. It has 512 megabytes of memory, and its two small processors have no vector instructions. The model also had to allow commercial use, which ruled out recent detection models under the AGPL licence.</p>
+    <p>I fine-tuned a detection model under a permissive licence to detect faces and number plates. The training data combined public datasets with 920 images from the robot, labelled automatically. The two classes were not equally represented, so I weighted the training loss to balance them. I converted the model from PyTorch to a 16-bit format that the camera's chip can run. Detection runs on the vision chip. Blurring and compression run on the small processors. Only the blurred stream leaves the camera.</p>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Capra/anonymisation-05-pipeline-dans-la-camera.png" alt="The four steps of the anonymisation pipeline inside the camera, then the ROS 2 node on the robot"></div>
     </figure>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Capra/anonymisation-03-detection-image-robot-parking.png" alt="A frame from the robot with the number plate pixelated"></div>
     </figure>
-    <p>The first working version had a delay of 2.5 seconds, and the delay kept growing. The model was not the cause. Images were waiting in memory queues between processing steps. Shorter queues made the pipeline run out of images instead. The solution was queues that hold a single image and replace it when a new one arrives. Blurred images also compress badly, so each image became about five times bigger. When the network could not send them fast enough, the pipeline froze. The camera now drops images when the network is too slow, and the delay stays stable.</p>
-    <p>The delay went from 2.5 seconds to 345 milliseconds and stays stable. The model reaches a detection score of 0.85 mAP at 0.5. The pipeline runs on ARLI in real conditions.</p>
+    <p>The first working version had a delay of 2.5 seconds, and the delay kept growing. The model was not the cause. Images were waiting in memory queues between processing steps. Shorter queues made the pipeline run out of images instead. The solution was queues that hold a single image and replace it when a new one arrives. Blurred images also compress badly, so each image became about 5 times bigger. When the network could not send them fast enough, the pipeline froze. The camera now drops images when the network is too slow, and the delay stays&nbsp;stable.</p>
+    <p>The delay went from 2.5 seconds to 345 milliseconds and stays stable. The model reaches a detection score of 0.85 mAP at 0.5. The pipeline runs on ARLI in real&nbsp;conditions.</p>
     <h2>Docking to a food cart</h2>
     <p>In food factories, workers push heavy steel carts by hand, often 250 to 350 kilograms, over 100 to 300 metres, on wet and cold floors. Capra's robot can tow these carts with a trailer. Dropping a cart off was already automated. Picking one up was not, and that is what customers wanted.</p>
-    <p>A worker pushes the cart into a zone by hand, so its real position is often 20 centimetres and 15 degrees away from what the map says. To lock onto the cart, the trailer needs a precision of about 20 millimetres. The trailer is behind the robot, so the robot has to approach in reverse and keep track of the cart during the whole manoeuvre.</p>
-    <p>The robot's computer has no graphics chip, so everything runs on the processor. Each LiDAR point has an error of 1 to 3.5 centimetres, which is more than the tolerance. The carts are made of polished stainless steel, so some parts do not appear in the LiDAR data. Below about 50 centimetres the sensor saturates and distorts the points, exactly where precision matters most.</p>
-    <p>The method belongs to Capra, so I will not describe it. The main ideas are that no single measurement is trusted, that the estimate becomes more precise as the robot gets closer, and that the system works without adding markers to the customers' carts.</p>
+    <p>A worker pushes the cart into a zone by hand, so its real position is often 20 centimetres and 15 degrees away from what the map says. To lock onto the cart, the trailer needs a precision of about 20 millimetres. The trailer is behind the robot, so the robot has to approach in reverse and keep track of the cart during the whole&nbsp;manoeuvre.</p>
+    <p>The robot's computer has no graphics chip, so everything runs on the processor. Each LiDAR point has an error of 1 to 3.5 centimetres, which is more than the tolerance. The carts are made of polished stainless steel, so some parts do not appear in the LiDAR data. Below about 50 centimetres the sensor saturates and distorts the points, exactly where precision matters&nbsp;most.</p>
+    <p>The method belongs to Capra, so I will not describe it. The main ideas are that no single measurement is trusted, that the estimate becomes more precise as the robot gets closer, and that the system works without adding markers to the customers'&nbsp;carts.</p>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Capra/docking-02-sequence-de-recuperation.png" alt="Six steps of the docking manoeuvre, from the approach to recovering the cart"></div>
     </figure>
     <figure>
       <div class="media media--narrow"><img src="../assets/documents/Capra/docking-01-robot-capra500-et-eurobin.png" alt="The Capra robot and the steel food cart it has to dock to"></div>
     </figure>
-    <p>The robot picked up the cart 18 times out of 18 during an hour of continuous tests. Each update takes less than 45 milliseconds on the processor. This unlocks the fully automatic mode.</p>
-    <p>I built this with <a href="https://www.linkedin.com/in/josevasq/">José Vasquez</a>. The reverse manoeuvre that uses the estimate is the work of Victor Risager.</p>
+    <p>The robot picked up the cart 18 times out of 18 in a 1-hour trial. Each update takes less than 45 milliseconds on the processor. This unlocks the fully automatic mode.</p>
+    <p>I built this with <a href="https://www.linkedin.com/in/josevasq/">José Vasquez</a>. The reverse manoeuvre that uses the estimate is the work of Victor&nbsp;Risager.</p>
   </article>
 
   <nav class="pager" aria-label="Other sheets">
